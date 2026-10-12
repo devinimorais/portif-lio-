@@ -112,9 +112,16 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.25, ease: EASE }}
               className="mt-5 max-w-2xl text-base font-medium leading-relaxed text-white/95 sm:mt-6 sm:text-xl lg:text-2xl lg:leading-relaxed"
             >
-              Construo produtos de ponta a ponta — de interfaces responsivas a
-              sistemas distribuídos — transformando problemas reais em software
-              que funciona em produção.
+              {/* Versão resumida no mobile */}
+              <span className="sm:hidden">
+                Construo produtos de ponta a ponta — do frontend à
+                infraestrutura — que funcionam em produção.
+              </span>
+              <span className="hidden sm:inline">
+                Construo produtos de ponta a ponta — de interfaces responsivas a
+                sistemas distribuídos — transformando problemas reais em
+                software que funciona em produção.
+              </span>
             </motion.p>
 
             <motion.div
