@@ -144,3 +144,18 @@ body {
 .animate-fade-in-up {
   animation: fade-in-up 0.8s ease-out both;
 }
+
+/* Esconde o botão de "play" nativo que o iOS/Chrome mostram quando o
+   autoplay do vídeo de fundo é bloqueado (ex.: modo de baixo consumo). */
+.bg-video {
+  pointer-events: none;
+}
+.bg-video::-webkit-media-controls,
+.bg-video::-webkit-media-controls-overlay-play-button,
+.bg-video::-webkit-media-controls-start-playback-button,
+.bg-video::-webkit-media-controls-panel {
+  display: none !important;
+  -webkit-appearance: none;
+  appearance: none;
+  opacity: 0;
+}

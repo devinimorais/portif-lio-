@@ -26,7 +26,12 @@ export function PrismaBackground({
         loop
         muted
         playsInline
-        className="absolute inset-0 h-full w-full object-cover"
+        preload="auto"
+        disablePictureInPicture
+        disableRemotePlayback
+        tabIndex={-1}
+        aria-hidden="true"
+        className="bg-video absolute inset-0 h-full w-full object-cover"
         src={videoSrc}
       />
 
