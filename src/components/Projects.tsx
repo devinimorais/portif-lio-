@@ -1,10 +1,10 @@
 import {
-  Bitcoin,
   Bot,
   CreditCard,
   Gamepad2,
   Megaphone,
   Phone,
+  Radar,
 } from "lucide-react"
 import {
   ProcessSection,
@@ -32,13 +32,13 @@ const PROJECTS: ProcessCardProps[] = [
       "Assistente pessoal inteligente (estilo Jarvis) em desenvolvimento, construído em Python para automação de tarefas e interação por linguagem natural.",
   },
   {
-    icon: Bitcoin,
-    title: "brcpix",
-    category: "Cripto · Fintech",
-    status: "Em produção",
-    stack: ["React", "Node.js", "PostgreSQL"],
+    icon: Radar,
+    title: "tracelapse",
+    category: "Observabilidade · Open Source",
+    status: "Publicado no npm",
+    stack: ["TypeScript", "Node.js", "NestJS", "OpenTelemetry"],
     description:
-      "Plataforma de gerenciamento de criptomoedas, com acompanhamento de carteiras e operações de ativos cripto.",
+      "Biblioteca Node.js de rastreamento de requisições: um traceId por request ligando o que entrou (HTTP), tudo que mudou no banco (antes/depois de cada linha) e o que saiu — com auditoria e time-travel de dados. Publicada no npm.",
   },
   {
     icon: CreditCard,
