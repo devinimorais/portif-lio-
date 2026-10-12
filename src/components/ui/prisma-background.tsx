@@ -43,7 +43,7 @@ export function PrismaBackground({
         disableRemotePlayback
         tabIndex={-1}
         aria-hidden="true"
-        className="bg-video absolute inset-0 hidden h-full w-full object-cover md:block"
+        className="bg-video absolute inset-0 h-full w-full object-cover"
         src={videoSrc}
       />
 
