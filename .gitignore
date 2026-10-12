@@ -26,3 +26,9 @@ dist-ssr
 # Playwright / screenshots temporários
 .playwright-mcp/
 topo-atual.png
+
+.vercel
+prod-live.png
+vercel-state.png
+favicon-preview.png
+favicon-live.png
