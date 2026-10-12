@@ -10,7 +10,7 @@ import { HugeiconsIcon } from "@hugeicons/react"
 const GITHUB_URL = "#"
 const LINKEDIN_URL =
   "https://www.linkedin.com/in/vin%C3%ADcius-magalh%C3%A3es-471542244/"
-const WHATSAPP_URL = "https://wa.me/5598981845625"
+export const WHATSAPP_URL = "https://wa.me/5598981845625"
 
 export default function Footer() {
   return (
@@ -20,10 +20,10 @@ export default function Footer() {
           © {new Date().getFullYear()} Vinicius Morais
         </p>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
           <a
             href="mailto:vinicius567morais@gmail.com"
-            className="inline-flex items-center gap-2 font-mono text-xs text-text-muted transition-colors hover:text-accent"
+            className="inline-flex basis-full items-center justify-center gap-2 font-mono text-xs text-text-muted transition-colors hover:text-accent sm:basis-auto"
           >
             <HugeiconsIcon icon={Mail01Icon} size={16} />
             vinicius567morais@gmail.com

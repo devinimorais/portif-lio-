@@ -80,11 +80,11 @@ export default function About() {
     <section
       ref={section}
       id="sobre"
-      className="mx-auto w-full max-w-[2200px] scroll-mt-20 px-6 py-8 lg:px-12"
+      className="mx-auto w-full max-w-[2200px] scroll-mt-20 px-3 py-4 sm:px-6 sm:py-8 lg:px-12"
     >
       <div
         ref={stage}
-        className="relative h-[calc(100vh-4rem)] w-full overflow-hidden rounded-2xl md:rounded-[2rem]"
+        className="relative h-[calc(100svh-2rem)] w-full sm:h-[calc(100svh-4rem)] overflow-hidden rounded-2xl md:rounded-[2rem]"
       >
         {/* Foto (troca clara/escura por tema via .about-bg) */}
         <div ref={photo} className="about-bg absolute inset-0 h-full w-full" />
@@ -95,6 +95,8 @@ export default function About() {
         {/* Scrims para legibilidade do texto */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-black/5" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
+        {/* No mobile o texto ocupa a largura toda: escurece mais a foto */}
+        <div className="pointer-events-none absolute inset-0 bg-black/35 sm:hidden" />
 
         {/* Título de abertura */}
         <div
@@ -108,36 +110,50 @@ export default function About() {
         </div>
 
         {/* Conteúdo que compõe com o scroll */}
-        <div className="absolute inset-0 flex items-center px-6 sm:px-10 lg:px-14">
+        <div className="absolute inset-0 flex items-center px-5 pb-16 sm:px-10 lg:px-14">
           <div className="w-full">
             <div className="max-w-2xl">
-              <div ref={header} className="opacity-0">
+              <div ref={header} className="opacity-0 short:max-sm:hidden">
                 <p className="font-mono text-sm tracking-wide text-accent">
                   01 — sobre mim
                 </p>
-                <h2 className="mt-3 font-display text-4xl font-bold text-white sm:text-5xl">
+                <h2 className="mt-2 font-display text-3xl font-bold text-white sm:mt-3 sm:text-5xl short:text-2xl short:sm:text-4xl">
                   Minha trajetória
                 </h2>
               </div>
 
-              <div ref={block1} className="mt-8 opacity-0">
-                <p className="font-mono text-sm uppercase tracking-[0.25em] text-white/50">
+              <div ref={block1} className="mt-6 opacity-0 sm:mt-8 short:mt-4">
+                <p className="font-mono text-xs uppercase tracking-[0.25em] text-white/50 sm:text-sm">
                   Trajetória
                 </p>
-                <p className="mt-3 text-lg leading-relaxed text-white/90 sm:text-xl lg:text-2xl lg:leading-relaxed">
-                  Comecei construindo interfaces e integrações para e-commerce e
-                  automação de marketing. Com o tempo, migrei para problemas mais
-                  profundos — backends em microsserviços, sistemas em tempo real
-                  e, mais recentemente, inteligência artificial aplicada a
-                  produto.
+                <p className="mt-2 text-base leading-relaxed text-white/90 sm:mt-3 sm:text-xl lg:tall:text-2xl short:text-sm short:sm:text-base short:max-sm:leading-normal">
+                  {/* Versão resumida no mobile */}
+                  <span className="sm:hidden">
+                    Comecei com sistemas de leitura, digitalização e
+                    processamento de documentos e migrei para sistemas
+                    financeiros, mercado financeiro e automação de processos,
+                    sempre buscando soluções eficientes, confiáveis e
+                    escaláveis.
+                  </span>
+                  <span className="hidden sm:inline">
+                    Iniciei minha trajetória no desenvolvimento de sistemas
+                    voltados à leitura, digitalização e processamento de
+                    documentos. Posteriormente, migrei para o desenvolvimento de
+                    sistemas financeiros, plataformas voltadas ao mercado
+                    financeiro e automações de processos. Ao longo dessa
+                    evolução, ampliei minha experiência na construção de
+                    aplicações, integrações entre serviços e implementação de
+                    regras de negócio, sempre buscando desenvolver soluções
+                    eficientes, confiáveis e escaláveis.
+                  </span>
                 </p>
               </div>
 
-              <div ref={block2} className="mt-7 opacity-0">
-                <p className="font-mono text-sm uppercase tracking-[0.25em] text-white/50">
+              <div ref={block2} className="mt-5 opacity-0 sm:mt-7 short:mt-4">
+                <p className="font-mono text-xs uppercase tracking-[0.25em] text-white/50 sm:text-sm">
                   O que me move
                 </p>
-                <p className="mt-3 text-lg leading-relaxed text-white/75 sm:text-xl lg:text-2xl lg:leading-relaxed">
+                <p className="mt-2 text-base leading-relaxed text-white/75 sm:mt-3 sm:text-xl lg:tall:text-2xl short:text-sm short:sm:text-base short:max-sm:leading-normal">
                   Entender o problema por inteiro antes da primeira linha de
                   código. Transito entre frontend, backend e infraestrutura
                   conforme a necessidade — e entrego algo que continue

@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
+/* Telas baixas (celular pequeno, notebook com zoom) e telas altas */
+@custom-variant short (@media (max-height: 720px));
+@custom-variant tall (@media (min-height: 1000px));
+
 @theme inline {
   --font-sans: "Geist", system-ui, sans-serif;
   --font-display: "Geist", system-ui, sans-serif;
@@ -116,6 +120,14 @@ body {
 .noise-overlay {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   background-size: 120px 120px;
+}
+
+/* Carrossel horizontal sem barra de rolagem visível */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 @keyframes fade-in-up {
