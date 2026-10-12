@@ -35,7 +35,7 @@ const PROJECTS: ProcessCardProps[] = [
     icon: Radar,
     title: "tracelapse",
     category: "Observabilidade · Open Source",
-    status: "Publicado no npm",
+    status: "Em produção",
     stack: ["TypeScript", "Node.js", "NestJS", "OpenTelemetry"],
     description:
       "Biblioteca Node.js de rastreamento de requisições: um traceId por request ligando o que entrou (HTTP), tudo que mudou no banco (antes/depois de cada linha) e o que saiu — com auditoria e time-travel de dados. Publicada no npm.",
