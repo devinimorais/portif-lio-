@@ -3,35 +3,47 @@ import type { ReactNode } from "react"
 interface PrismaBackgroundProps {
   className?: string
   videoSrc?: string
+  posterSrc?: string
   children?: ReactNode
 }
 
 const DEFAULT_VIDEO =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4"
 
+const DEFAULT_POSTER = "/hero-bg.jpg"
+
 /**
  * Efeito de fundo extraído do PrismaHero: vídeo em loop + camada de ruído
  * + gradiente escuro para legibilidade. Renderiza `children` por cima.
+ *
+ * No mobile o vídeo é ocultado e usamos uma imagem estática (poster) como
+ * fundo — o iOS bloqueia autoplay (ex.: modo de baixo consumo) e mostraria
+ * um botão de "play" por cima do conteúdo.
  */
 export function PrismaBackground({
   className = "",
   videoSrc = DEFAULT_VIDEO,
+  posterSrc = DEFAULT_POSTER,
   children,
 }: PrismaBackgroundProps) {
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      {/* Vídeo de fundo */}
+    <div
+      className={`relative overflow-hidden bg-cover bg-center ${className}`}
+      style={{ backgroundImage: `url(${posterSrc})` }}
+    >
+      {/* Vídeo de fundo — só no desktop (md+) */}
       <video
         autoPlay
         loop
         muted
         playsInline
         preload="auto"
+        poster={posterSrc}
         disablePictureInPicture
         disableRemotePlayback
         tabIndex={-1}
         aria-hidden="true"
-        className="bg-video absolute inset-0 h-full w-full object-cover"
+        className="bg-video absolute inset-0 hidden h-full w-full object-cover md:block"
         src={videoSrc}
       />
 
