@@ -138,10 +138,6 @@ export default function Hero() {
               <p className="font-mono text-sm font-medium tracking-wide text-blue-300">
                 Com o que eu trabalho
               </p>
-              <p className="max-w-md text-sm leading-relaxed text-white/90 sm:text-base">
-                Uma stack completa — do frontend à infraestrutura — escolhida
-                conforme o problema que cada projeto exige.
-              </p>
             </div>
 
             {/* Mobile: carrossel horizontal; sm+: grid escalonado (staggered) */}

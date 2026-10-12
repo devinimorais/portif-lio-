@@ -17,61 +17,66 @@ export default function About() {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({
-        defaults: { ease: "none" },
-        scrollTrigger: {
-          trigger: section.current,
-          start: "top top",
-          end: "+=2200",
-          pin: stage.current,
-          scrub: 1,
-          onUpdate: (self) => {
-            if (hint.current) {
-              hint.current.style.opacity = self.progress > 0.03 ? "0" : "1"
-            }
+      // A animação "pinned" (prende a seção e revela o texto no scroll) só
+      // roda no desktop. No mobile o conteúdo é estático e sempre visível.
+      const mm = gsap.matchMedia()
+
+      mm.add("(min-width: 640px)", () => {
+        const tl = gsap.timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: {
+            trigger: section.current,
+            start: "top top",
+            end: "+=2200",
+            pin: stage.current,
+            scrub: 1,
+            onUpdate: (self) => {
+              if (hint.current) {
+                hint.current.style.opacity = self.progress > 0.03 ? "0" : "1"
+              }
+            },
           },
-        },
+        })
+
+        // Foto: parallax vertical via background-position
+        tl.fromTo(
+          photo.current,
+          { backgroundPositionY: "38%" },
+          { backgroundPositionY: "62%" },
+          0,
+        )
+
+        // Título de abertura (centralizado) sai de cena
+        tl.to(
+          intro.current,
+          { opacity: 0, y: -40, scale: 0.94, filter: "blur(12px)", duration: 0.25 },
+          0,
+        )
+
+        // Cabeçalho compõe
+        tl.fromTo(
+          header.current,
+          { opacity: 0, y: 30, filter: "blur(8px)" },
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.2 },
+          0.22,
+        )
+
+        // Bloco 1 — Trajetória
+        tl.fromTo(
+          block1.current,
+          { opacity: 0, y: 48, filter: "blur(10px)" },
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.22 },
+          0.4,
+        )
+
+        // Bloco 2 — O que me move
+        tl.fromTo(
+          block2.current,
+          { opacity: 0, y: 48, filter: "blur(10px)" },
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.22 },
+          0.64,
+        )
       })
-
-      // Foto: parallax vertical via background-position (sem transform,
-      // para não vazar do clip arredondado nem criar scroll horizontal)
-      tl.fromTo(
-        photo.current,
-        { backgroundPositionY: "38%" },
-        { backgroundPositionY: "62%" },
-        0,
-      )
-
-      // Título de abertura (centralizado) sai de cena
-      tl.to(
-        intro.current,
-        { opacity: 0, y: -40, scale: 0.94, filter: "blur(12px)", duration: 0.25 },
-        0,
-      )
-
-      // Cabeçalho compõe
-      tl.fromTo(
-        header.current,
-        { opacity: 0, y: 30, filter: "blur(8px)" },
-        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.2 },
-        0.22,
-      )
-
-      // Bloco 1 — Trajetória
-      tl.fromTo(
-        block1.current,
-        { opacity: 0, y: 48, filter: "blur(10px)" },
-        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.22 },
-        0.4,
-      )
-
-      // Bloco 2 — O que me move
-      tl.fromTo(
-        block2.current,
-        { opacity: 0, y: 48, filter: "blur(10px)" },
-        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.22 },
-        0.64,
-      )
     },
     { scope: section },
   )
@@ -82,9 +87,50 @@ export default function About() {
       id="sobre"
       className="mx-auto w-full max-w-[2200px] scroll-mt-20 px-3 py-4 sm:px-6 sm:py-8 lg:px-12"
     >
+      {/* ---------- MOBILE: estático, sempre visível ---------- */}
+      <div className="relative overflow-hidden rounded-2xl sm:hidden">
+        <div className="about-bg absolute inset-0 h-full w-full" />
+        <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.45] mix-blend-overlay" />
+        <div className="pointer-events-none absolute inset-0 bg-black/70" />
+
+        <div className="relative z-10 px-5 py-10">
+          <p className="font-mono text-sm tracking-wide text-accent">
+            01 — sobre mim
+          </p>
+          <h2 className="mt-2 font-display text-4xl font-bold leading-tight text-white">
+            Minha trajetória
+          </h2>
+
+          <div className="mt-7">
+            <p className="font-mono text-xs uppercase tracking-[0.25em] text-white/50">
+              Trajetória
+            </p>
+            <p className="mt-2 text-base leading-relaxed text-white/90">
+              Comecei com sistemas de leitura, digitalização e processamento de
+              documentos e migrei para sistemas financeiros, mercado financeiro
+              e automação de processos, sempre buscando soluções eficientes,
+              confiáveis e escaláveis.
+            </p>
+          </div>
+
+          <div className="mt-6">
+            <p className="font-mono text-xs uppercase tracking-[0.25em] text-white/50">
+              O que me move
+            </p>
+            <p className="mt-2 text-base leading-relaxed text-white/75">
+              Entender o problema por inteiro antes da primeira linha de código.
+              Transito entre frontend, backend e infraestrutura conforme a
+              necessidade — e entrego algo que continue funcionando muito depois
+              do deploy.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ---------- DESKTOP: cinematográfico (pinned no scroll) ---------- */}
       <div
         ref={stage}
-        className="relative h-[calc(100svh-2rem)] w-full sm:h-[calc(100svh-4rem)] overflow-hidden rounded-2xl md:rounded-[2rem]"
+        className="relative hidden h-[calc(100svh-4rem)] w-full overflow-hidden rounded-2xl sm:block md:rounded-[2rem]"
       >
         {/* Foto (troca clara/escura por tema via .about-bg) */}
         <div ref={photo} className="about-bg absolute inset-0 h-full w-full" />
@@ -95,8 +141,6 @@ export default function About() {
         {/* Scrims para legibilidade do texto */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-black/5" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
-        {/* No mobile o texto ocupa a largura toda: escurece mais a foto */}
-        <div className="pointer-events-none absolute inset-0 bg-black/35 sm:hidden" />
 
         {/* Título de abertura */}
         <div
@@ -127,25 +171,15 @@ export default function About() {
                   Trajetória
                 </p>
                 <p className="mt-2 text-base leading-relaxed text-white/90 sm:mt-3 sm:text-xl lg:tall:text-2xl short:text-sm short:sm:text-base short:max-sm:leading-normal">
-                  {/* Versão resumida no mobile */}
-                  <span className="sm:hidden">
-                    Comecei com sistemas de leitura, digitalização e
-                    processamento de documentos e migrei para sistemas
-                    financeiros, mercado financeiro e automação de processos,
-                    sempre buscando soluções eficientes, confiáveis e
-                    escaláveis.
-                  </span>
-                  <span className="hidden sm:inline">
-                    Iniciei minha trajetória no desenvolvimento de sistemas
-                    voltados à leitura, digitalização e processamento de
-                    documentos. Posteriormente, migrei para o desenvolvimento de
-                    sistemas financeiros, plataformas voltadas ao mercado
-                    financeiro e automações de processos. Ao longo dessa
-                    evolução, ampliei minha experiência na construção de
-                    aplicações, integrações entre serviços e implementação de
-                    regras de negócio, sempre buscando desenvolver soluções
-                    eficientes, confiáveis e escaláveis.
-                  </span>
+                  Iniciei minha trajetória no desenvolvimento de sistemas
+                  voltados à leitura, digitalização e processamento de
+                  documentos. Posteriormente, migrei para o desenvolvimento de
+                  sistemas financeiros, plataformas voltadas ao mercado
+                  financeiro e automações de processos. Ao longo dessa evolução,
+                  ampliei minha experiência na construção de aplicações,
+                  integrações entre serviços e implementação de regras de
+                  negócio, sempre buscando desenvolver soluções eficientes,
+                  confiáveis e escaláveis.
                 </p>
               </div>
 
